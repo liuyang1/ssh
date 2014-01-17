@@ -1,0 +1,21 @@
+== meta ==
+dict
+
+"fine_label_name" -> ["apple", "aquarium_fish", ... , "woman", "worm"]
+
+"coarse_label_name" -> ["aquatic_mammals", ... , "vehicles_2"]
+
+== test/train ==
+dict
+
+data -> two-dim list, int element [0, 256)
+
+10000x3072 numpy array of unit8s, each row of array stores a 32 x 32 colour image, first 1024 entries contain the red channel values. then is green/blue.
+
+batch_label -> testing batch 1 of 1
+
+fine_labels -> [49, 33, 72, ...]
+
+coarse_labels -> [10, 10, 0, 4, ...]
+
+filenames -> ['volcano_s_000012.png', ... ]
