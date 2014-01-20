@@ -5,14 +5,15 @@ from cifar import load
 
 meta, test, train = load.loadData()
 
-testdata = test["data"]
+traindata = train["data"]
 
 gist = "lear_gist-1.2/compute_gist"
+# using lear gist implemention
 gistcmd = [gist, "/tmp/cifar.ppm"]
 
 cnt = 0
 allans = []
-for data in testdata:
+for data in traindata:
     load.writePPM(32,32,data)
     ans = subprocess.check_output(gistcmd)
     ans = [float(i) for i in ans.split()]
@@ -22,4 +23,6 @@ for data in testdata:
 
 import cPickle as pickle
 
-pickle.dump(allans, "/tmp/gistans.py.data")
+fw = open("/tmp/gist.ans.py.data","wo")
+pickle.dump(allans, fw)
+fw.close()
