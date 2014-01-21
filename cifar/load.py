@@ -1,5 +1,6 @@
 import conf
 import struct
+import os
 
 
 def unpickle(filename):
@@ -29,9 +30,17 @@ def writePPM(width, height, data, filename="/tmp/cifar.ppm"):
     fw = open(filename, "wb")
     quant = 255
     fw.write("P6\n%d %d\n%d\n" % (width, height, quant))
-    for i in data:
-        fw.write(struct.pack("B", i))
+    pixelcnt = width * height
+    for i in xrange(pixelcnt):
+        fw.write(struct.pack("B", data[0 + i]))
+        fw.write(struct.pack("B", data[pixelcnt + i]))
+        fw.write(struct.pack("B", data[pixelcnt * 2 + i]))
     fw.close()
+
+
+def checkDir(pathname):
+    if not os.path.exists(pathname):
+        os.mkdir(pathname)
 
 
 if __name__ == "__main__":
