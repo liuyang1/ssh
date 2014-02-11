@@ -2,14 +2,15 @@ import sys
 import numpy as np
 import cPickle as pickle
 
-sys.path.append("..")
+sys.path.append("../..")
 from cifar import load
 
 import logger
 log = logger.get()
 # !!! first 1000
 if len(sys.argv) == 1:
-    filename = "/home/liuy/obj/gist.ans.py.data"
+    #filename = "/home/liuy/obj/gist.ans.py.data"
+    filename = "/home/liuy/obj/gist_batch_1.1000.ans.py.data"
 else:
     filename = sys.argv[1]
 fo = open(filename)
@@ -18,7 +19,7 @@ fo.close()
 log.info("load features")
 
 meta, test, train = load.loadData()
-labels = load.buildLabelMatrix(train["labels"])
+labels = load.buildLabelMatrix(train["labels"][0:1000])
 log.info("load labels")
 
 X = np.matrix(features)
