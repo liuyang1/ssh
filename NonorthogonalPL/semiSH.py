@@ -7,8 +7,8 @@ from cifar import load
 
 import logger
 log = logger.get()
+# !!! first 1000
 if len(sys.argv) == 1:
-    # filename = "/home/liuy/obj/gist_batch_1.1000.ans.py.data"
     filename = "/home/liuy/obj/gist.ans.py.data"
 else:
     filename = sys.argv[1]
@@ -18,7 +18,6 @@ fo.close()
 log.info("load features")
 
 meta, test, train = load.loadData()
-# labels = load.buildLabelMatrix(train["labels"][0:1000])
 labels = load.buildLabelMatrix(train["labels"])
 log.info("load labels")
 
@@ -28,7 +27,7 @@ Xl = X
 log.info("X ok")
 S = np.matrix(labels)
 log.info("S ok")
-eta = 0.6
+eta = 0.6 #TODO:
 
 # M0 = Xl*S*Xl.T
 M0 = Xl * S
@@ -40,9 +39,19 @@ log.info("M1 ok")
 M = M0 + M1
 log.info("M ok")
 
-V, W = np.linalg.eig(M)
+rho = 0.3 #TODO:
+
+Q = np.eye(M.shape[0]) + 1/rho*M
+log.info("Q ok")
+
+L = np.linalg.cholesky(Q, lower = True)
+log.info("cholesky decompostion L ok")
+U = np.linalg.cholesky(Q, lower = False)
+log.info("cholesky decompostion U ok")
+
+log.info('TODO W = L U k')
+W = 1
 log.info("W \n%s" % (W))
-log.info("V \n%s" % (V))
 
 fw = open("/tmp/ansW", "wb")
 W.dump(fw)
