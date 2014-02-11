@@ -40,14 +40,20 @@ log.info("M1 ok")
 M = M0 + M1
 log.info("M ok")
 
-rho = 0.3 #TODO:
+eigVal, eigVec = np.linalg.eig(M)
+print eigVal
+print min(eigVal)
+
+import sys
+sys.exit()
+rho = 0.3 # rho > max(0, -min(lambda of M))
 
 Q = np.eye(M.shape[0]) + 1/rho*M
 log.info("Q ok")
 
-L = np.linalg.cholesky(Q, lower = True)
+L = np.linalg.cholesky(Q)
 log.info("cholesky decompostion L ok")
-U = np.linalg.cholesky(Q, lower = False)
+U = L.T # TODO: U = L.T ???
 log.info("cholesky decompostion U ok")
 
 log.info('TODO W = L U k')
