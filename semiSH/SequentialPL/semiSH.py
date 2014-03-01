@@ -47,10 +47,10 @@ M1 = eta * X * X.T
 Sk = S
 alpha = 0.1  # TODO:
 for i in xrange(K):
+    log.info("wk %d/%d" % (i, K))
     M = Xl * Sk * Xl.T + M1
     eigVal, eigVec = np.linalg.eig(M)
     wk = eigVec[0].T
-    log.info("wk %d/%d" % (i, K))
     Sk_tidle = Xl.T * wk * wk.T * Xl
     Sk1 = Sk - alpha * T_func(Sk_tidle, Sk)
     X = X - wk * wk.T * X

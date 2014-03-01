@@ -12,7 +12,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 # add log to stdout
 sout = logging.StreamHandler(sys.stdout)
-sfmt = logging.Formatter("%(levelname)s %(message)s")
+sfmt = logging.Formatter("%(asctime)s %(levelname)s %(message)s")
 sout.setFormatter(sfmt)
 logger.addHandler(sout)
 
