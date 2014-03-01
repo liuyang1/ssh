@@ -18,12 +18,10 @@ X = X.T
 log.info("X ok")
 
 t1 = time.time()
-q, r = np.linalg.qr(X)
+q, r = np.linalg.qr(X.T)
 log.info("qr ok")
 
-r2 = r * r.T
-# x2 = q * r * r.T * q.T
-r2 = q * r2 * q.T
+r2 = r.T * r
 t2 = time.time()
 log.info("elapsed %s seconds" % (t2 - t1))
 
