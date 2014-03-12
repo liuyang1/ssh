@@ -40,6 +40,7 @@ log.info("M1 ok")
 M = M0 + M1
 log.info("M ok")
 
+log.info("M size %s" % (M.shape))
 V, W = np.linalg.eig(M)
 log.info("W \n%s" % (W))
 log.info("V \n%s" % (V))
