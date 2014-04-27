@@ -35,7 +35,7 @@ if __name__ == "__main__":
     W = np.load(fo)
     fo.close()
 
-    K = 8
+    K = 12
 
     log.info("W\n%s" % (W))
     W = W[0:K, :]
@@ -52,9 +52,9 @@ if __name__ == "__main__":
     hashingArray = [hashingK(W, X[:, i]) for i in xrange(col)]
     # print hashingArray
 
-    query = [0, 0, 0, 0, 1, 0, 0, 1]
+    query = [0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1]
     query = scipy.array(query)
-    h = hashingArray[0]
-    r = 2.0 / K
     rank = [scipy.spatial.distance.hamming(query, h) for h in hashingArray]
-    print [(idx, val) for idx, val in enumerate(rank) if val < r]
+    for i in xrange(K):
+        r = (i+0.0)/K
+        print i,len([(idx, val) for idx, val in enumerate(rank) if val == r])
